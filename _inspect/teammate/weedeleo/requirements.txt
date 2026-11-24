@@ -1,0 +1,5 @@
+flask>=3.0
+opencv-python-headless>=4.8
+numpy>=1.24
+colorama; platform_system=="Windows"
+# Optional: pytest (to run tests), ultralytics (only when you have models/weed.pt)

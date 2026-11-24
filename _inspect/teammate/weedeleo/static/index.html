@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weedeleo dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><h1>Weedeleo</h1><span>Weed detection and laser-treatment console</span></div>
+  <div class="hdr-right">
+    <span id="link" class="chip">Link</span>
+    <span id="uptime" class="muted">00:00:00</span>
+    <span id="badge" class="badge IDLE">IDLE</span>
+  </div>
+</header>
+<div id="offline" class="alert bad" hidden>Connection lost. The dashboard is retrying; treatment is disabled until the link returns.</div>
+<div id="fault" class="alert warn" hidden></div>
+<main>
+  <section class="panel live">
+    <div class="bar">
+      <div class="seg">
+        <button id="m-live" data-mode="live">Live camera</button>
+        <button id="m-video" data-mode="video">Test video</button>
+      </div>
+      <span class="spacer"></span>
+      <button id="setArea">Set area</button>
+      <button id="clearArea">Clear area</button>
+    </div>
+    <div class="vwrap">
+      <img id="vid" src="/video" alt="Live view">
+      <canvas id="cv"></canvas>
+    </div>
+    <p id="vbanner" class="note" hidden>Test video mode: the laser is disabled. Detections are logged as skipped.</p>
+    <p class="hint">Drag on the video to draw the working area, then press Set area.</p>
+  </section>
+  <aside>
+    <section class="panel">
+      <div class="row">
+        <button id="start" class="primary">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+        <button id="estop" class="danger">Emergency stop</button>
+      </div>
+      <div class="row small">
+        <label><input type="checkbox" id="interlock" checked> Interlock closed (simulation)</label>
+        <span class="spacer"></span>
+        <button id="report">Task report</button>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="stats">
+        <div><b id="s-det">0</b><span>Detections in view</span></div>
+        <div><b id="s-area">0</b><span>Weeds in area</span></div>
+        <div><b id="s-tr">0</b><span>Treated</span></div>
+        <div><b id="s-sk">0</b><span>Skipped</span></div>
+        <div><b id="s-fps">0</b><span>Frames per second</span></div>
+      </div>
+      <div class="chips" id="chips"></div>
+    </section>
+    <section class="panel logs">
+      <div class="bar">
+        <select id="lvl"><option value="">All levels</option><option>info</option><option>warning</option><option>error</option><option>critical</option></select>
+        <input id="q" placeholder="Search logs">
+        <a class="btn" href="/api/logs/export" download>Export CSV</a>
+      </div>
+      <div class="scroll"><table><thead><tr><th>Time</th><th>Level</th><th>Event</th></tr></thead><tbody id="logbody"></tbody></table></div>
+    </section>
+  </aside>
+</main>
+<div id="modal" class="modal" hidden><div class="card"><h2>Task report</h2><div id="repbody"></div><button id="closeRep">Close</button></div></div>
+<div id="toasts"></div>
+<script src="app.js"></script>
+</body>
+</html>

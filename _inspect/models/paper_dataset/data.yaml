@@ -1,0 +1,17 @@
+
+path: /
+
+train: /kaggle/working/paper_dataset/train.txt
+val: /kaggle/working/paper_dataset/val.txt
+test: /kaggle/working/paper_dataset/test.txt
+
+nc: 7
+
+names:
+  0: Herb Paris
+  1: Bitter gourd
+  2: Small weed
+  3: Grass
+  4: Sponge gourd
+  5: Horseweed
+  6: Okra
